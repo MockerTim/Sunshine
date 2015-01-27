@@ -1,0 +1,1 @@
+01-08 13:07:08.484: E/qcom_sensors_hal(768): hal_process_report_ind: Bad item quality: 11 
