@@ -1,6 +1,5 @@
 package com.example.android.sunshine;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
