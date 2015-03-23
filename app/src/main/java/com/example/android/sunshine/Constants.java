@@ -9,7 +9,7 @@ public interface Constants {
     /**
      * ADM log application tag
      */
-    String TAG = "com.example.android.Sunshine";
+    String TAG = "Sunshine";
 
     /**
      * Debugging flag. Set to false to reduse the amount of application log messages in ADM
