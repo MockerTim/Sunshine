@@ -28,7 +28,7 @@ public class WeatherContract {
     public static long normalizeDate(long startDate) {
         // normalize the start date to the beginning of the (UTC) day
         Time time = new Time();
-        time.setToNow();
+        time.set(startDate);
         int julianDay = Time.getJulianDay(startDate, time.gmtoff);
         return time.setJulianDay(julianDay);
     }
@@ -40,16 +40,6 @@ public class WeatherContract {
      */
     public static final class LocationEntry implements BaseColumns {
         public static final String TABLE_NAME = "location";
-
-        public static final String COLUMN_LOCATION_SETTING = "location_setting";
-        // Location city name, for instance: "Moscow,ru"
-        public static final String COLUMN_CITY_NAME = "city_name";
-
-        // Location latitude
-        public static final String COLUMN_COORD_LAT = "coord_lat";
-
-        // Location longitude
-        public static final String COLUMN_COORD_LONG = "coord_long";
 
     }
 
