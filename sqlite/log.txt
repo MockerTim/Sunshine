@@ -1,0 +1,7 @@
+(1) near "width": syntax error
+(1) no such column: empid
+(284) automatic index on department(emp_id)
+(284) automatic index on department(emp_id)
+(1) near "foreign": syntax error
+(1) near "foreign": syntax error
+(1) near "foreign": syntax error
