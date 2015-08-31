@@ -264,11 +264,19 @@ public class WeatherProvider extends ContentProvider {
         final int match = sUriMatcher.match(uri);
         Uri returnUri;
 
+        int rowsDeleted = 0;
+
+        if(selection == null) selection = "1";
+
         switch (match) {
             case WEATHER: {
+                //if(selection != null)
+                    rowsDeleted = db.delete(WeatherContract.WeatherEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             }
             case LOCATION: {
+                //if(selection != null)
+                    rowsDeleted = db.delete(WeatherContract.LocationEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             }
             default:
@@ -279,9 +287,11 @@ public class WeatherProvider extends ContentProvider {
         // the uri listeners (using the content resolver) if the rowsDeleted != 0 or the selection
         // is null.
         // Oh, and you should notify the listeners here.
-
+        if(rowsDeleted != 0)
+            getContext().getContentResolver().notifyChange(uri, null);
+        db.close();
         // Student: return the actual rows deleted
-        return 0;
+        return rowsDeleted;
     }
 
     private void normalizeDate(ContentValues values) {
@@ -293,11 +303,38 @@ public class WeatherProvider extends ContentProvider {
     }
 
     @Override
-    public int update(
-            Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
         // Student: This is a lot like the delete function.  We return the number of rows impacted
         // by the update.
-        return 0;
+        final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+
+        final int match = sUriMatcher.match(uri);
+        Uri returnUri;
+
+        int rowsUpdated = 0;
+
+        switch (match) {
+            case WEATHER: {
+                normalizeDate(values);
+                if(selection != null)
+                    rowsUpdated = db.update(WeatherContract.WeatherEntry.TABLE_NAME, values, selection, selectionArgs);
+                break;
+            }
+            case LOCATION: {
+                normalizeDate(values);
+                if(selection != null)
+                    rowsUpdated = db.update(WeatherContract.LocationEntry.TABLE_NAME, values, selection, selectionArgs);
+                break;
+            }
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
+
+        if(rowsUpdated != 0)
+            getContext().getContentResolver().notifyChange(uri, null);
+        db.close();
+
+        return rowsUpdated;
     }
 
     @Override
