@@ -9,4 +9,6 @@
     <string name="pref_temp_units_label">Выберите ед. изм.</string>
     <string name="pref_location_label">Выберите регион</string>
     <string name="action_show_location">Показать местоположение</string>
+    <string name="action_refresh">Обновить</string>
+    <string name="action_share">Поделиться</string>
 </resources>
